@@ -1,0 +1,45 @@
+CROSS_HOST="x86_64-w64-mingw32"
+inherit cross
+
+NAME="mingw64-x86_64-fox"
+VERSION=1.6.49
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="FOX C++ GUI Toolkit for Win64 toolchain"
+DESCRIPTION="This package does NOT contain cygwin binaries.  Instead, it
+contains msvcrt-linked binaries (aka 'mingw').  It is for use with the
+mingw64-x86_64-gcc cross compiler, and installs into the
+/usr/x86_64-w64-mingw32/sys-root/mingw/{lib,include} directories."
+HOMEPAGE="http://www.fox-toolkit.org/"
+SRC_URI="http://ftp.fox-toolkit.org/pub/fox-${VERSION}.tar.gz"
+SRC_DIR="fox-${VERSION}"
+
+PATCH_URI="
+	1.6-no-undefined.patch
+	1.6.43-fxsaveJPG.patch
+"
+
+REQUIRES="reswrap"
+
+CYGCONF_ARGS="
+	--enable-bz2lib
+	--enable-jpeg
+	--enable-png
+	--enable-tiff
+	--enable-zlib
+	--with-opengl
+	--without-x
+	--without-xft
+	--without-xshm
+	--without-shape
+	--without-xcursor
+	--without-xrender
+	--without-xrandr
+	--without-xfixes
+	--without-xinput
+	--without-xim
+"
+MAKEOPTS+=" RESWRAP=/usr/bin/reswrap bin_PROGRAMS= man_MANS= HTML_FILES= ART_FILES= SCREENSHOTS_FILES="
+
+DOCS="ADDITIONS LICENSE_ADDENDUM TRACING"
+KEEP_LA_FILES="none"

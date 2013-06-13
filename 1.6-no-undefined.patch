@@ -1,0 +1,25 @@
+--- origsrc/fox-1.6.33/chart/Makefile.am	2008-04-03 21:56:50.000000000 -0500
++++ src/fox-1.6.33/chart/Makefile.am	2008-05-02 09:49:03.750000000 -0500
+@@ -8,10 +8,11 @@
+ 
+ lib_LTLIBRARIES = libCHART-1.6.la
+ 
+-libCHART_1_6_la_LIBADD  = $(X_LIBS) $(X_BASE_LIBS) $(X_EXTRA_LIBS)
++libCHART_1_6_la_LIBADD  = ../src/libFOX-1.6.la $(X_LIBS) $(X_BASE_LIBS) $(X_EXTRA_LIBS)
+ 
+ libCHART_1_6_la_LDFLAGS = \
+         -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)    \
++	-no-undefined \
+ 	-export-dynamic
+ 
+ chartincludedir=$(includedir)/fox-1.6/chart
+--- origsrc/fox-1.6.33/src/Makefile.am	2008-04-03 21:57:01.000000000 -0500
++++ src/fox-1.6.33/src/Makefile.am	2008-05-02 09:49:03.843750000 -0500
+@@ -11,6 +11,7 @@
+ 
+ libFOX_1_6_la_LDFLAGS = \
+         -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)    \
++	-no-undefined \
+ 	-export-dynamic
+ 
+ CURSORS = \
