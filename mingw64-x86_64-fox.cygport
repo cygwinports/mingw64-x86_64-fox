@@ -3,7 +3,7 @@ inherit cross
 
 NAME="mingw64-x86_64-fox"
 VERSION=1.6.49
-RELEASE=1
+RELEASE=2
 CATEGORY="Devel"
 SUMMARY="FOX C++ GUI Toolkit for Win64 toolchain"
 DESCRIPTION="This package does NOT contain cygwin binaries.  Instead, it
@@ -16,7 +16,6 @@ SRC_DIR="fox-${VERSION}"
 
 PATCH_URI="
 	1.6-no-undefined.patch
-	1.6.43-fxsaveJPG.patch
 "
 
 REQUIRES="reswrap"
@@ -39,7 +38,14 @@ CYGCONF_ARGS="
 	--without-xinput
 	--without-xim
 "
-MAKEOPTS+=" RESWRAP=/usr/bin/reswrap bin_PROGRAMS= man_MANS= HTML_FILES= ART_FILES= SCREENSHOTS_FILES="
+MAKEOPTS+=" RESWRAP=/usr/bin/reswrap bin_PROGRAMS= "
+
+src_install() {
+	cd ${B}
+	cyginstall man_MANS= HTML_FILES= ART_FILES= SCREENSHOTS_FILES=
+
+	rm -f ${D}${CROSS_BINDIR}/Adie.stx
+}
 
 DOCS="ADDITIONS LICENSE_ADDENDUM TRACING"
 KEEP_LA_FILES="none"
